@@ -6,7 +6,7 @@ import { verifyToken } from "../middlewares/auth.js";
 const router = Router()
 
 
-router.get('/productos',verifyToken, crearProductoController) // ruta privadas
+router.post('/nuevos/producto', crearProductoController) // ruta privadas
 router.get('/productos/:id', verProductoController)
 router.get('/productos/todos', verTodosProductosController)
 router.put('/productos/:id',verifyToken, actualizarProductoController) // ruta privada

@@ -1,8 +1,16 @@
 const productor ={
 
     // para crear producto
-    crearProductoModelo(){
-        // código
+    async crearProductoModelo(nuevoProducto){
+        const url = 'https://appdemon.free.beeceptor.com/api/tours'
+        const peticion = await fetch(url,{
+            method: 'POST', // verbo que quiero ejecutar 
+            body: JSON.stringify(nuevoProducto), // informacion
+            headers: {'Content-Type':'application/json'} // tipo de contenido
+        })
+        const data = await peticion.json()
+
+        return data
     }
     ,
 
@@ -30,4 +38,4 @@ const productor ={
     
 }
     
-    export default productor
+export default productor

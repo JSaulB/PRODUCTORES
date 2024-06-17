@@ -1,4 +1,4 @@
-import userModel from "../models/users.js"
+import userModel from "../models/usuarios.js"
 import{v4 as uuidv4} from 'uuid'
 import bcrypt from "bcrypt"
 import { createToken } from "../middlewares/auth.js"
