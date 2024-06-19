@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 const usuarios = {
     async registorUsuarioModelo(newUserData){
 
-        const url = 'http://localhost:4000/users'
+        const url = 'https://usuariosapp.free.beeceptor.com/api/usuarios'
         const peticion = await fetch(url,{
             method: 'POST', // verbo que quiero ejecutar 
             body: JSON.stringify(newUserData), // informacion
@@ -17,7 +17,7 @@ const usuarios = {
     ,
     async loginUsuarioModelo(userName,password){
 
-        const url = 'http://localhost:4000/users'
+        const url = 'https://usuariosapp.free.beeceptor.com/api/usuarios'
         const peticion = await fetch(url)
         const users = await peticion.json()
         const user = users.find(user => user.username===userName)
@@ -32,6 +32,25 @@ const usuarios = {
         }
 
     }
+    ,
+    async  obtenerEmailRegistrado(userId) {
+        const url = `https://usuariosapp.free.beeceptor.com/api/usuarios/${userId}`; // Suponiendo que la API pueda devolver el usuario por ID
+    
+        try {
+            const response = await fetch(url);
+    
+            if (!response.ok) {
+                throw new Error('Error al obtener el email del usuario');
+            }
+    
+            const usuario = await response.json();
+            return usuario.email;
+        } catch (error) {
+            console.error('Error al obtener el email registrado:', error.message);
+            throw error;
+        }
+    }
+    
 
 }
 

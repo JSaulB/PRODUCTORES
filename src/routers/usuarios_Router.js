@@ -3,8 +3,8 @@ import { loginUsuarioController, registroUsuarioController } from "../controller
 
 const router = Router()
 
-router.post('/users/register', registroUsuarioController)
-router.post('/users/login', loginUsuarioController)
+router.post('/usuario/registro', registroUsuarioController)
+router.post('/usuario/login', loginUsuarioController)
 
 
 
