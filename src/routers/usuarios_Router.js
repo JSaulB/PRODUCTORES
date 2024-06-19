@@ -1,10 +1,15 @@
 import { Router, request } from "express";
-import { loginUsuarioController, registroUsuarioController } from "../controllers/usuarios_Controller.js";
+import { borrarUsuarioController, loginUsuarioController, registroUsuarioController, verUsuarioController } from "../controllers/usuarios_Controller.js";
 
 const router = Router()
 
-router.post('/usuario/registro', registroUsuarioController)
-router.post('/usuario/login', loginUsuarioController)
+router.post('/usuarios/registro', registroUsuarioController)
+router.post('/usuarios/login',loginUsuarioController)
+
+// administrador
+
+router.delete('/usuarios/borrar/:id',borrarUsuarioController)
+router.get('/usuarios/ver/:id', verUsuarioController)
 
 
 

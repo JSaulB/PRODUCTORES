@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt"
 
 const usuarios = {
-    async registorUsuarioModelo(newUserData){
+    async registroUsuarioModelo(newUserData){
 
         const url = 'https://usuariosapp.free.beeceptor.com/api/usuarios'
         const peticion = await fetch(url,{
@@ -22,34 +22,44 @@ const usuarios = {
         const users = await peticion.json()
         const user = users.find(user => user.username===userName)
         if (!user){
-            return{error:"Username or password incorrect"}
+            return{error:"Username o contraseña incorrecto"}
             }
             const passwordMatch = await bcrypt.compare(password,user.password)
             if (user && passwordMatch){
                 return user
             }else{
-                return{error:"Username or password incorrect"}
+                return{error:"Username o contraseña incorrecto"}
         }
 
     }
     ,
-    async  obtenerEmailRegistrado(userId) {
-        const url = `https://usuariosapp.free.beeceptor.com/api/usuarios/${userId}`; // Suponiendo que la API pueda devolver el usuario por ID
-    
-        try {
-            const response = await fetch(url);
-    
-            if (!response.ok) {
-                throw new Error('Error al obtener el email del usuario');
-            }
-    
-            const usuario = await response.json();
-            return usuario.email;
-        } catch (error) {
-            console.error('Error al obtener el email registrado:', error.message);
-            throw error;
-        }
+    // para ver usuario especifico 
+    async verUsuarioModelo(usuarioID){
+        console.log(usuarioID)
+        const response = await fetch(`https://usuariosapp.free.beeceptor.com/api/usuarios/${usuarioID}`)
+        if (!response.ok){
+            return {error:"Usuario no encontrado"}
+        }   
+
+        const data = await response.json()
+
+        return data
     }
+    ,
+    // para eliminar producto
+    async eliminarUsuarioModelo(usuarioID){
+        // código
+        const url = `https://usuariosapp.free.beeceptor.com/api/usuarios/${usuarioID}`;
+        const peticion = await fetch(url, {
+            method: 'DELETE', // verbo para eliminar
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        await peticion.json();
+        return {msg:"Usuario eliminado correctamente"}
+    }
+    
     
 
 }

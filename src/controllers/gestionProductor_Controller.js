@@ -90,15 +90,12 @@ const verProductoController =async (req,res) =>{
 // para comprar producto
 const comprarProductoController = async (req, res) => {
     const { id } = req.body;
-    const {email} = req.body;
     try {
-        const emailUsuario = await usuarios.registorUsuarioModelo({ email });
         const resultado = await productor.comprarProductoModelo(id);
         if (!resultado) {
             return res.status(404).json({ message: 'Producto no encontrado' });
         }
         res.status(200).json(resultado);
-        sendMailToUser(emailUsuario)
     } catch (error) {
         res.status(500).json({ msg: error.message });
     }
