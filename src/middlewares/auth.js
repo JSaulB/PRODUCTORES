@@ -30,8 +30,27 @@ const verifyToken = (req,res,next)=>{
 
 }
 
+const verifyAdminToken = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: "Token no proporcionado, intente iniciar sesión" });
+    }
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, 'secret_key', (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: "Fallo al autentificar el token" });
+      }
+      if (decoded.id !== 'cc1fabd6-ceeb-4f6c-8b76-f21288f0a7c5') {
+        return res.status(403).json({ message: "No tienes permisos de administrador" });
+      }
+      req.user = decoded;
+      next();
+    })
+}
+
 
 export {
     createToken,
-    verifyToken
+    verifyToken,
+    verifyAdminToken
 }
