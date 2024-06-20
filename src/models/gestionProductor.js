@@ -3,7 +3,7 @@ const productor ={
 
     // para crear producto
     async crearProductoModelo(nuevoProducto){
-        const url = 'https://productosapp.free.beeceptor.com/api/productos'
+        const url = 'https://appproduct.free.beeceptor.com/api/productos'
         const peticion = await fetch(url,{
             method: 'POST', // verbo que quiero ejecutar 
             body: JSON.stringify(nuevoProducto), // informacion
@@ -30,7 +30,7 @@ const productor ={
     // para eliminar producto
     async eliminarProductoModelo(productoID){
         // código
-        const url = `https://productosapp.free.beeceptor.com/api/productos/${productoID}`;
+        const url = `https://appproduct.free.beeceptor.com/api/productos/${productoID}`;
         const peticion = await fetch(url, {
             method: 'DELETE', // verbo para eliminar
             headers: {
@@ -43,7 +43,7 @@ const productor ={
     ,
     async verProductoModelo(productoID){
         console.log(productoID)
-        const response = await fetch(`https://productosapp.free.beeceptor.com/api/productos/${productoID}`)
+        const response = await fetch(`https://appproduct.free.beeceptor.com/api/productos/${productoID}`)
         if (!response.ok){
             return {error:"Producto no encontrado"}
         }   
@@ -58,7 +58,7 @@ const productor ={
     // para ver  todos los productos productos
     async verTodosProductosModelo(){
         // código
-        const url = 'https://productosapp.free.beeceptor.com/api/productos'
+        const url = 'https://appproduct.free.beeceptor.com/api/productos'
         return await fetch  (url)
           .then(response => response.json())
           .catch(error => console.error('Error:', error));
@@ -67,7 +67,7 @@ const productor ={
 
     // para comprar producto
     async comprarProductoModelo(productoID) {
-        const url = `https://productosapp.free.beeceptor.com/api/comprar/${productoID}`;
+        const url = `https://appproduct.free.beeceptor.com/api/productos/${productoID}`;
         const peticion = await fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'}

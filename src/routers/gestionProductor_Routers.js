@@ -54,7 +54,7 @@ const router = Router()
  *       '500':
  *         description: Error interno del servidor
  */
-router.post('/nuevos/producto', crearProductoController) // ruta privadas
+router.post('/nuevos/producto',verifyToken, crearProductoController) // ruta privadas
 /**
  * @swagger
  * /v1/productos/{id}:
@@ -122,7 +122,7 @@ router.get('/todos/productos', verTodosProductosController)
  *       '500':
  *         description: Error interno del servidor
  */
-router.put('/productos/:id',actualizarProductoController) // ruta privada
+router.put('/productos/:id',verifyToken, actualizarProductoController) // ruta privada
 /**
  * @swagger
  * /v1/productos/{id}:
@@ -147,7 +147,7 @@ router.put('/productos/:id',actualizarProductoController) // ruta privada
  *         description: Error interno del servidor
  */
 
-router.delete('/productos/:id', eliminarProductoController) // ruta privada
+router.delete('/productos/:id',verifyToken, eliminarProductoController) // ruta privada
 /**
  * @swagger
  * /v1/productos/comprar/{id}:
@@ -172,6 +172,6 @@ router.delete('/productos/:id', eliminarProductoController) // ruta privada
  *       '500':
  *         description: Error interno del servidor
  */
-router.post('/productos/comprar/:id',comprarProductoController)
+router.post('/productos/comprar/:id',verifyToken, comprarProductoController)
 
 export default router

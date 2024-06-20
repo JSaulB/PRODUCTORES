@@ -96,7 +96,7 @@ router.post('/usuarios/login',loginUsuarioController)
  *       '500':
  *         description: Error interno del servidor
  */
-router.delete('/usuarios/borrar/:id',borrarUsuarioController)
+router.delete('/usuarios/borrar/:id',verifyToken, borrarUsuarioController)
 /**
  * @swagger
  * /v1/usuarios/ver/{id}:
@@ -118,7 +118,7 @@ router.delete('/usuarios/borrar/:id',borrarUsuarioController)
  *       '500':
  *         description: Error interno del servidor
  */
-router.get('/usuarios/ver/:id', verUsuarioController)
+router.get('/usuarios/ver/:id', verifyToken, verUsuarioController)
 
 
 
