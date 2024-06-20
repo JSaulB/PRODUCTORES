@@ -1,4 +1,3 @@
-import sendMailToUser from "../config/nodemailer.js"
 
 const productor ={
 
@@ -76,7 +75,6 @@ const productor ={
         // Simulación de respuesta
         return {
             msg: `Compra del producto con ID: ${productoID} realizada con éxito.`,
-            recibo: "Recibo enviado a su correo electrónico"
         };
     }
 

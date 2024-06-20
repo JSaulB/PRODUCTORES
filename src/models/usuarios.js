@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 const usuarios = {
     async registroUsuarioModelo(newUserData){
 
-        const url = 'https://usuariosapp.free.beeceptor.com/api/usuarios'
+        const url = 'https://appusuarios.free.beeceptor.com/api/usuarios'
         const peticion = await fetch(url,{
             method: 'POST', // verbo que quiero ejecutar 
             body: JSON.stringify(newUserData), // informacion
@@ -17,7 +17,7 @@ const usuarios = {
     ,
     async loginUsuarioModelo(userName,password){
 
-        const url = 'https://usuariosapp.free.beeceptor.com/api/usuarios'
+        const url = 'https://appusuarios.free.beeceptor.com/api/usuarios'
         const peticion = await fetch(url)
         const users = await peticion.json()
         const user = users.find(user => user.username===userName)
@@ -36,7 +36,7 @@ const usuarios = {
     // para ver usuario especifico 
     async verUsuarioModelo(usuarioID){
         console.log(usuarioID)
-        const response = await fetch(`https://usuariosapp.free.beeceptor.com/api/usuarios/${usuarioID}`)
+        const response = await fetch(`https://appusuarios.free.beeceptor.com/api/usuarios/${usuarioID}`)
         if (!response.ok){
             return {error:"Usuario no encontrado"}
         }   
@@ -49,7 +49,7 @@ const usuarios = {
     // para eliminar producto
     async eliminarUsuarioModelo(usuarioID){
         // código
-        const url = `https://usuariosapp.free.beeceptor.com/api/usuarios/${usuarioID}`;
+        const url = `https://appusuarios.free.beeceptor.com/api/usuarios/${usuarioID}`;
         const peticion = await fetch(url, {
             method: 'DELETE', // verbo para eliminar
             headers: {
