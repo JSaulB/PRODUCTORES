@@ -2,9 +2,6 @@ import productor from "../models/gestionProductor.js"
 import{v4 as uuidv4} from 'uuid'
 import {v2 as cloudinary} from 'cloudinary'
 import fsExtra from 'fs-extra'
-import sendMailToUser from "../config/nodemailer.js"
-import usuarios from "../models/usuarios.js"
-
 // para crear producto
 const crearProductoController = async (req,res) =>{
     const nuevoProductoData ={
@@ -89,17 +86,20 @@ const verProductoController =async (req,res) =>{
 
 // para comprar producto
 const comprarProductoController = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
     try {
-        const resultado = await productor.comprarProductoModelo(id);
-        if (!resultado) {
-            return res.status(404).json({ message: 'Producto no encontrado' });
-        }
-        res.status(200).json(resultado);
+      const resultado = await productor.comprarProductoModelo(id);
+      if (!resultado) {
+        return res.status(404).json({ message: 'Producto no encontrado' });
+      }
+
+  
+      res.status(200).json(resultado);
     } catch (error) {
-        res.status(500).json({ msg: error.message });
+      res.status(500).json({ msg: error.message });
     }
-}
+  };
+
 
 
 export{
@@ -108,5 +108,6 @@ export{
     eliminarProductoController,
     verTodosProductosController,
     verProductoController,
-    comprarProductoController
+    comprarProductoController,
+
  }

@@ -13,12 +13,12 @@ let transporter = nodemailer.createTransport({
     }
 });
 // metodo para enviar correos electronicos 
-const sendMailToUser = (userMail) => {
+const sendMailToUser = () => {
 
     let mailOptions = {
         from: process.env.USER_MAILTRAP,
-        to: userMail,
-        subject: "Recibo de compra",
+        to: "saulnike111@gmail.com",
+        subject: "Verifica tu cuenta",
         html: `<p>Hola, gracias por tu compra, esperamos seguir contando con tu ayuda :D </p>`
     };
     
