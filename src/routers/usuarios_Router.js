@@ -17,16 +17,20 @@ const router = Router()
  *     Usuario:
  *       type: object
  *       required:
- *         - id
+ *         - username
  *         - password
  *         - email
  *       properties:
- *         id:
+ *         username:
  *           type: string
  *         password:
  *           type: string
  *         email:
  *           type: string
+ *       example:
+ *          username: saul
+ *          password: 12345
+ *          email: saulnike111@gmail.com
  */
 
 /**
@@ -65,6 +69,10 @@ router.post('/usuarios/registro', registroUsuarioController)
  *                 type: string
  *               password:
  *                 type: string
+ *           example:
+ *               value:
+ *                 username: Saul
+ *                 password: 12345   
  *     responses:
  *       '200':
  *         description: Usuario autenticado correctamente

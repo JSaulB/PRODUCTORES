@@ -5,48 +5,20 @@ import rutaUsuario from './routers/usuarios_Router.js'
 import cloudinary from 'cloudinary'
 import dontenv from 'dotenv'
 import fileUpload from 'express-fileupload';
-
-dontenv.config()
-// const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
-
-//Swagger
-import path from 'path';
-import { fileURLToPath } from 'url';
-import swaggerUI from 'swagger-ui-express';
+//Importaciones para documentacion de la api
+import { swaggerUI, swaggerSpec } from './swagger.js';
 import swaggerJsDoc from 'swagger-jsdoc';
 
 
-// Definir __dirname en módulos ES6
-// const __filename = fileURLToPath(import.meta.url);
-// console.log(__filename);
-// const __dirname = path.dirname(__filename);
+dontenv.config()
+// const express = require('express')
 
-// Definición de la especificación de Swagger
-//  const swaggerSpec = {
-//      definition: {
-//          openapi: "3.0.0",
-//          info: {
-//              title: "Productores API",
-//              version: "1.0.0",
-//          },
-//          servers: [
-//              {
-//                  url: "http://localhost:3000",
-//              },
-//          ],
-//      },
-//      apis: [`${path.join(__dirname, "./routers/*.js")}`],
-//  };
+const app = express();
+const port = process.env.PORT || 3000;
 
-// Configurar Swagger en la ruta /api-doc
-// app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
-// Middleware para manejar JSON y file uploads
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-//Swagger
+//Swager
+app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -60,7 +32,6 @@ app.use(fileUpload({
 }))
 
 
-
 app.get('/', (req, res) => {
     res.send('Hola mundo');
   });
@@ -68,6 +39,7 @@ app.get('/', (req, res) => {
 // Inicia el servidor
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
+  console.log(`Documentación de la API disponible en http://localhost:${port}/api-docs`);
 });
 
 

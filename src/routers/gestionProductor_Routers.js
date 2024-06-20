@@ -4,7 +4,14 @@ import { verifyToken } from "../middlewares/auth.js";
 
 
 const router = Router()
+/**
+ * @swagger
+ * tags:
+ *   name: Productos
+ *   description: Operaciones relacionadas con productos
+ */
 
+/**
 /**
  * @swagger
  * components:
@@ -12,19 +19,17 @@ const router = Router()
  *     Producto:
  *       type: object
  *       required:
- *         - id
  *         - nombre
  *         - precio
+ *         - descripcion
  *       properties:
- *         id:
- *           type: string
  *         nombre:
  *           type: string
  *         precio:
  *           type: number
- *         // otras propiedades del producto
+ *         descripcion:
+ *           type: string 
  */
-
 /**
  * @swagger
  * /v1/nuevos/producto:
@@ -37,7 +42,7 @@ const router = Router()
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
@@ -45,53 +50,68 @@ const router = Router()
  *                 type: string
  *               precio:
  *                 type: number
+ *               descripcion:
+ *                 type: string
  *               imagen:
  *                 type: string
  *                 format: binary
+ *           example:
+ *               nombre: Leche de Vaca
+ *               precio: 5
+ *               descripcion: Leche buena para los huesos
+ *               imagen: Colocar imagen
  *     responses:
  *       '200':
  *         description: Producto creado exitosamente
  *       '500':
  *         description: Error interno del servidor
  */
-router.post('/nuevos/producto',verifyToken, crearProductoController) // ruta privadas
+router.post('/nuevos/producto', verifyToken, crearProductoController);
 /**
  * @swagger
- * /v1/productos/{id}:
+ * /v1/todos/producto:
  *   get:
- *     summary: Obtener un producto por su ID
+ *     summary: Ver todos los productos
  *     tags:
  *       - Productos
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json::
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *               precio:
+ *                 type: number
+ *               descripcion:
+ *                 type: string
+ *               imagen:
+ *                 type: string
+ *                 format: binary
+ *           example:
+ *             producto1:
+ *               nombre: Leche de Vaca
+ *               precio: 5
+ *               descripcion: Leche buena para los huesos
+ *               imagen: Colocar imagen
+ *             producto2:
+ *               nombre: Huevos
+ *               precio: 1
+ *               descripcion: Para el desayuno
+ *               imagen: Colocar imagen 
  *     responses:
  *       '200':
- *         description: Producto encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Producto'
- *       '404':
- *         description: Producto no encontrado
+ *         description: Lista de productos
+ *       '500':
+ *         description: Error interno del servidor
  */
-router.get('/productos/:id', verProductoController);
-/**
- * @swagger
- * /v1/todos/productos:
- *   get:
- *     summary: Obtener todos los productos
- *     tags:
- *       - Productos
- *     responses:
- *       '200':
- *         description: Lista de productos obtenida correctamente
- *       '404':
- *         description: No se encontraron productos
- */
+
+
+
 router.get('/todos/productos', verTodosProductosController)
 /**
  * @swagger
