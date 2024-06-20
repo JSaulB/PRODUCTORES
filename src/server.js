@@ -19,28 +19,29 @@ import swaggerJsDoc from 'swagger-jsdoc';
 
 
 // Definir __dirname en módulos ES6
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// console.log(__filename);
+// const __dirname = path.dirname(__filename);
 
 // Definición de la especificación de Swagger
-const swaggerSpec = {
-    definition: {
-        openapi: "3.0.0",
-        info: {
-            title: "Productores API",
-            version: "1.0.0",
-        },
-        servers: [
-            {
-                url: "http://localhost:3000",
-            },
-        ],
-    },
-    apis: [`${path.join(__dirname, "./routers/*.js")}`],
-};
+//  const swaggerSpec = {
+//      definition: {
+//          openapi: "3.0.0",
+//          info: {
+//              title: "Productores API",
+//              version: "1.0.0",
+//          },
+//          servers: [
+//              {
+//                  url: "http://localhost:3000",
+//              },
+//          ],
+//      },
+//      apis: [`${path.join(__dirname, "./routers/*.js")}`],
+//  };
 
 // Configurar Swagger en la ruta /api-doc
-app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
+// app.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 // Middleware para manejar JSON y file uploads
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
